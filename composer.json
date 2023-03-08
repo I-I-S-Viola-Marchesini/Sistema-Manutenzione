@@ -1,0 +1,16 @@
+{
+    "name": "viola-marchesini/sistema-manutenzione",
+    "description": "Software Web per gestire le ispezioni e la manutenzione dei materiali per l'I.I.S. Viola Marchesini",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "ViolaMarchesini\\SistemaManutenzione\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Studenti dell'I.I.S. Viola Marchesini"
+        }
+    ],
+    "require": {}
+}
