@@ -9,8 +9,38 @@
     },
     "authors": [
         {
-            "name": "Studenti dell'I.I.S. Viola Marchesini"
+            "name": "Alex Niccolò Ferrari",
+            "homepage": "https://github.com/PaninoCode",
+            "role": "Developer"
+        },
+        {
+            "name": "Angelo Pavan",
+            "homepage": "https://github.com/AngeloPavan",
+            "role": "Developer"
+        },
+        {
+            "name": "Giovanni Marchetto",
+            "homepage": "https://github.com/gmarck04",
+            "role": "Developer"
+        },
+        {
+            "name": "Studenti delle future classi quinte",
+            "homepage": "https://github.com/orgs/I-I-S-Viola-Marchesini/people",
+            "role": "Maintainers"
         }
     ],
-    "require": {}
+    "support": {
+        "source": "https://github.com/I-I-S-Viola-Marchesini/Sistema-Manutenzione",
+        "issues": "https://github.com/I-I-S-Viola-Marchesini/Sistema-Manutenzione/issues"
+    },
+    "require": {
+        "twbs/bootstrap": "5.3.0-alpha1",
+        "violamarchesini/violabootstrap": "dev-main"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "custom_libraries/violabootstrap"
+        }
+    ]    
 }
