@@ -1,3 +1,2 @@
 @echo off
-composer update
-start "sass" /min cmd.exe /c "sass --watch vendor/violamarchesini/custombootstrap:src/styles/css"
+start "sass" cmd.exe /c "composer update && sass --watch vendor/violamarchesini/violabootstrap:src/styles/css"
