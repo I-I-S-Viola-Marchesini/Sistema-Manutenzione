@@ -29,21 +29,21 @@ Software Web per gestire le ispezioni e la manutenzione dei materiali per l'I.I.
 
 ### Contenuti della repository:
 
-### `analisi`
+#### `analisi`
 Cartella contenente le analisi per il progetto.
 > [ℹ️] I File .drawio.svg possono essere modificati usando [Diagrams.net](https://app.diagrams.net/), anche direttamente dal browser
 
-### `custom_libraries`
+#### `custom_libraries`
 Librerie create appositamente per il progetto, da caricare usando composer ("composer update").
 
-### `custom_libraries\violabootstrap`
+#### `custom_libraries\violabootstrap`
 Modifiche apportate al tema di default di Bootstrap.
 > ⚠️ Bootstrap va modificato usando **solo** i file nella cartella `custom_libraries\violabootstrap`, perché le cartelle `vendor\twbs\bootstrap` e `vendor\violamarchesini\violabootstrap` vengono entrambe ignorate da Git e non vengono incluse nei commit.
 
-### `src`
+#### `src`
 Cartella di sviluppo principale del progetto
 
-### `vendor`
+#### `vendor`
 Dependencies gestite da Composer
 
 ---
