@@ -5,11 +5,12 @@ Software Web per gestire le ispezioni e la manutenzione dei materiali per l'I.I.
 
 ## Il Progetto
 
-### Autori:
+### Autori originali:
 
-- Giovanni Marchetto - *[@gmarck04](https://github.com/gmarck04)*
-- Alex Niccolò Ferrari - *[@PaninoCode](https://github.com/PaninoCode)*
-- Angelo Pavan - *[@AngeloPavan](https://github.com/AngeloPavan)*
+|Alex Niccolò Ferrari|Angelo Pavan|Giovanni Marchetto|
+|:-:|:-:|:-:|
+|![@PaninoCode](https://github.com/PaninoCode.png?size=50)|![@AngeloPavan](https://github.com/AngeloPavan.png?size=50)|![@gmarck04](https://github.com/gmarck04.png?size=50)|
+|*[@PaninoCode](https://github.com/PaninoCode)*|*[@AngeloPavan](https://github.com/AngeloPavan)*|*[@gmarck04](https://github.com/gmarck04)*|
 
 ---
 

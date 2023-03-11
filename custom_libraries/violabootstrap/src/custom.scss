@@ -1,6 +1,6 @@
-@import "../../../twbs/bootstrap/scss/functions";
+@import "../../../twbs/bootstrap/scss/functions", "variables";
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 
-//Esempio: Cambiamo il colore primario di bootstrap
-$primary : #ff00bf;
+$font-family-base: "Ubuntu", sans-serif;
 
 @import "../../../twbs/bootstrap/scss/bootstrap";

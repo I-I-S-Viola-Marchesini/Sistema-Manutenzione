@@ -1,0 +1,53 @@
+//CUSTOM COLORS
+$purple: #7d3ff8;
+$gray: #5c656d;
+$green: #00b894;
+$red: #f33737;
+$blue: #4da3e6;
+$yellow: #ecca3f;
+$light-color: #f8f9fa;
+$dark-color: #2c2c2c;
+
+$primary: $purple;
+$secondary: $gray;
+$success: $green;
+$info: $blue;
+$warning: $yellow;
+$danger: $red;
+$light: $light-color;
+$dark: $dark-color;
+
+$primary-text: $primary;
+$secondary-text: $secondary;
+$success-text: $success;
+$info-text: $info;
+$warning-text: $warning;
+$danger-text: $danger;
+$light-text: $light;
+$dark-text: $dark;
+
+$primary-bg-subtle: lighten($primary, 25%);
+$secondary-bg-subtle: lighten($secondary, 25%);
+$success-bg-subtle: lighten($success, 25%);
+$info-bg-subtle: lighten($info, 25%);
+$warning-bg-subtle: lighten($warning, 25%);
+$danger-bg-subtle: lighten($danger, 25%);
+$light-bg-subtle: lighten($light, 25%);
+$dark-bg-subtle: lighten($dark, 25%);
+
+$primary-border-subtle: lighten($primary, 15%);
+$secondary-border-subtle: lighten($secondary, 15%);
+$success-border-subtle: lighten($success, 15%);
+$info-border-subtle: lighten($info, 15%);
+$warning-border-subtle: lighten($warning, 15%);
+$danger-border-subtle: lighten($danger, 15%);
+$light-border-subtle: lighten($light, 15%);
+$dark-border-subtle: lighten($dark, 15%);
+
+$navbar-light-toggler-border-color: transparent;
+$navbar-light-toggler-icon-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='#{$light}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>");
+
+a.navbar-brand{
+    border-right: 1px solid $light-color;
+    padding-right: 10px;
+}
