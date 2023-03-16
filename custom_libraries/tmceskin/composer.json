@@ -1,0 +1,11 @@
+{
+    "name": "violamarchesini/tmceskin",
+    "description": "Skin personalizzata per TinyMCE",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Violamarchesini\\Tmceskin\\": "src/"
+        }
+    },
+    "require": {}
+}

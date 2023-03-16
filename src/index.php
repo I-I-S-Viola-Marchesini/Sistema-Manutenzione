@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../vendor/autoload.php';
+$loader = require_once __DIR__ . '/vendor/autoload.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,16 +20,16 @@ require_once __DIR__ . '/../vendor/autoload.php';
             ?>
         </div>
         <div class="row">
-            <div class="col-10 col-12-lg">
+            <div class="col-12">
                 <?php
-                    require_once __DIR__ . '/components/_contents.php';
+                    require_once __DIR__ . '/components/_editorTest.php';
                 ?>
             </div>
         </div>
     </div>
     <script>
         <?php
-            include __DIR__ . '/../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js';
+            require_once __DIR__ . '/vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js'
         ?>
     </script>
 </body>

@@ -2,6 +2,9 @@
     "name": "viola-marchesini/sistema-manutenzione",
     "description": "Software Web per gestire le ispezioni e la manutenzione dei materiali per l'I.I.S. Viola Marchesini",
     "type": "project",
+    "config": {
+        "vendor-dir": "src/vendor"
+    },
     "autoload": {
         "psr-4": {
             "ViolaMarchesini\\SistemaManutenzione\\": "src/"
@@ -35,7 +38,8 @@
     },
     "require": {
         "twbs/bootstrap": "5.3.0-alpha1",
-        "violamarchesini/violabootstrap": "dev-main"
+        "violamarchesini/violabootstrap": "dev-main",
+        "tinymce/tinymce": "^6.4"
     },
     "repositories": [
         {
