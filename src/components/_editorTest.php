@@ -7,7 +7,7 @@
         promotion: false
     });
 </script>
-<div class="container pt-4">
+<div class="container-fluid pt-4">
     <form>
         <textarea class="w-100" id="tinymce">Hello, World!</textarea>
     </form>
