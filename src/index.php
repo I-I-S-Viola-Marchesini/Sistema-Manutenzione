@@ -15,14 +15,19 @@ $loader = require_once __DIR__ . '/vendor/autoload.php';
 
 <body class="">
     <div class="container-fluid">
-        <div class="row sticky-top">
+        <div class="row sticky-top" id="header">
             <?php
             require_once __DIR__ . '/components/_header.php';
             ?>
         </div>
         <div class="row">
-            <div class="col-12" id="contents">
+            <div class="col-12" style="min-height: 70vh;" id="contents">
             </div>
+        </div>
+        <div class="row" id="footer">
+            <?php
+            require_once __DIR__ . '/components/_footer.php';
+            ?>
         </div>
     </div>
     <script>
