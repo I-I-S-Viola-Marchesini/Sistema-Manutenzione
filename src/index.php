@@ -9,6 +9,7 @@ $loader = require_once __DIR__ . '/vendor/autoload.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/styles/bootstrap/custom.css" rel="stylesheet">
+    <script src="/vendor/tinymce/tinymce/tinymce.min.js"></script>
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
     <title>Sistema Manutenzione</title>
 </head>
@@ -32,12 +33,12 @@ $loader = require_once __DIR__ . '/vendor/autoload.php';
     </div>
     <script>
         <?php
-        require_once __DIR__ . '/vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js'
+            require_once __DIR__ . '/vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js'
         ?>
     </script>
     <script>
         <?php
-        require_once $_SERVER['DOCUMENT_ROOT'] . '/scripts/pageSwitcher.js'
+            require_once $_SERVER['DOCUMENT_ROOT'] . '/scripts/pageSwitcher.js'
         ?>
     </script>
 </body>

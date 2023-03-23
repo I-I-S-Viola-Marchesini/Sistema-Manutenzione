@@ -1,21 +1,25 @@
 const routes = {
     '/': {
-        'location' : 'components/_home.php',
+        'page' : 'components/_home.php',
+        'script' : undefined,
         'title' : 'Home',
         'type' : 'page'
     },
     '/textEditor': {
-        'location' : 'components/_editorTest.php',
+        'page' : 'components/_editorTest.php',
+        'script' : 'scripts/_textEditors.js',
         'title' : 'Text Editor',
         'type' : 'page'
     },
     '/bootstrap': {
-        'location' : 'components/_bstemp.php',
+        'page' : 'components/_bstemp.php',
+        'script' : undefined,
         'title' : 'Bootstrap',
         'type' : 'page'
     },
     '/404': {
-        'location' : 'components/_404.php',
+        'page' : 'components/_404.php',
+        'script' : undefined,
         'title' : 'Errore 404',
         'type' : '404error'
     },
@@ -32,26 +36,46 @@ function switcher() {
 
     if (routes[page] == undefined) {
         console.log("Route (" + page + ") doesn't point to any page. Loading 404 page.")
-        loadPage(routes['/404'].location, routes['/404'].title, routes['/404'].type);
+        loadPage(routes['/404'].page, routes['/404'].script, routes['/404'].title, routes['/404'].type);
         return;
     }else{
-        loadPage(routes[page].location, routes[page].title, routes[page].type);
+        loadPage(routes[page].page, routes[page].script, routes[page].title, routes[page].type);
     }
 }
 
-function loadPage(location, title, type) {
-    let xhr = new XMLHttpRequest();
-    xhr.open("GET", location, true);
-    console.log("Requested page at: " + location);
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4 && (xhr.status == 200 || type == '404error')) {
-            console.log("Page at (" + location + ") loaded successfully.")
-            document.getElementById("contents").innerHTML = xhr.responseText;
+function loadPage(page, script, title, type) {
+    let pageRequest = new XMLHttpRequest();
+    pageRequest.open("GET", page, true);
+    console.log("Requested page at: " + page);
+    pageRequest.onreadystatechange = function () {
+        if (pageRequest.readyState == 4 && (pageRequest.status == 200 || type == '404error')) {
+            console.log("Page at (" + page + ") loaded successfully.");
+            document.getElementById("contents").innerHTML = pageRequest.responseText;
+            if (script != undefined) {
+                let scriptRequest = new XMLHttpRequest();
+                scriptRequest.open("GET", script, true);
+                console.log("Requested script at: " + script);
+                scriptRequest.onreadystatechange = function () {
+                    if (scriptRequest.readyState == 4 && scriptRequest.status == 200) {
+                        console.log("Script at (" + script + ") loaded successfully.");
+                        eval(scriptRequest.responseText);
+                    } else if (scriptRequest.readyState == 4 && scriptRequest.status != 200) {
+                        console.error("Script at (" + script + ") is 404 not found.");
+                    }
+                };
+                scriptRequest.send();
+            }
             document.title = title + " - Sistema Manutenzione";
-        } else if (xhr.readyState == 4 && xhr.status != 200) {
-            console.log("Page at (" + location + ") is 404 not found. Loading 404 page.")
-            loadPage(routes['/404'].location, routes['/404'].title, routes['/404'].type);
+            try{
+                bootstrap.Offcanvas.getInstance(document.querySelector('#offcanvas_menu')).hide();
+            }catch(e){
+                console.log("Offcanvas not found. Probably not loaded yet.");
+            }
+        } else if (pageRequest.readyState == 4 && pageRequest.status != 200) {
+            console.log("Page at (" + page + ") is 404 not found. Loading 404 page.")
+            loadPage(routes['/404'].page, routes['/404'].script, routes['/404'].title, routes['/404'].type);
         }
     };
-    xhr.send();
+    pageRequest.send();
+    window.scrollTo(0, 0);
 }
