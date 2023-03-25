@@ -5,9 +5,9 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <?php
-      include 'components/_menu.php';
-      ?>
+      <ul id="menu_navbar" class="navbar-nav me-auto mb-2 mb-lg-0">
+
+      </ul>
     </div>
   </div>
 </nav>
@@ -17,9 +17,8 @@
     <h5 class="offcanvas-title">Sistema Manutenzione</h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
-  <div class="offcanvas-body text-dark">
-    <?php
-    include 'components/_menu.php';
-    ?>
+  <div class="offcanvas-body">
+    <div id="menu_offcanvas" class="list-group list-group-flush">
+    </div>
   </div>
 </div>
