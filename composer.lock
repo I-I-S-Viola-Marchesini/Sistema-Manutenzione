@@ -201,7 +201,7 @@
             "dist": {
                 "type": "path",
                 "url": "custom_libraries/violabootstrap",
-                "reference": "1af8241b563d4c282fadc66cfd249a1e8d020263"
+                "reference": "7ce6a089d9a51a9c5e39137c373e4925e896b399"
             },
             "type": "library",
             "autoload": {
