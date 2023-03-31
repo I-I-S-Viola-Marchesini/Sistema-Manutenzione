@@ -5,6 +5,7 @@
 - ### Recupero Password (GET)
 - ### Cambio Password (SET)
 - ### Registrazione (SET)
+- ### Ruoli (GET / SET)
 - ### Macchinari (GET / SET)
 - ### Firme (GET / SET)
 - ### Calendario Scadenze (GET / SET) 
