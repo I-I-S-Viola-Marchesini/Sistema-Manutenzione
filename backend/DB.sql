@@ -8,6 +8,11 @@ CREATE TABLE utente(
     password VARCHAR(256) NOT NULL,
     ruolo INT NOT NULL
 );
+CREATE TABLE token(
+    token VARCHAR(256) PRIMARY KEY,
+    id_utente VARCHAR(6) NOT NULL,
+    data_creazione DATETIME NOT NULL
+);
 CREATE TABLE ruolo(
     id_ruolo INT PRIMARY KEY,
     nome VARCHAR(20) NOT NULL,
@@ -79,6 +84,9 @@ CREATE TABLE manutenzione_esterno(
 
 ALTER TABLE utente ADD CONSTRAINT FK_utente_ruolo
 FOREIGN KEY (ruolo) REFERENCES ruolo(id_ruolo);
+
+ALTER TABLE token ADD CONSTRAINT FK_token_utente
+FOREIGN KEY (id_utente) REFERENCES utente(id_utente);
 
 ALTER TABLE controllo_controllo_specifico ADD CONSTRAINT FK_impianto_controllo_controllo_specifico 
 FOREIGN KEY (id_controllo) REFERENCES impianto(id_controllo);
