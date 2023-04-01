@@ -8,6 +8,7 @@ CREATE TABLE utente(
     password VARCHAR(256) NOT NULL,
     ruolo INT NOT NULL
 );
+
 CREATE TABLE token(
     token VARCHAR(256) PRIMARY KEY,
     id_utente VARCHAR(6) NOT NULL,
