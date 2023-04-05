@@ -15,7 +15,7 @@ class Persona
         FROM $this->table_name 
         WHERE email = '$email' AND password = '$password'";
 
-        $stmt = $this->conn->query($query);        
+        $stmt = $this->conn->query($query);
 
         return $stmt;
     }
@@ -25,14 +25,7 @@ class Persona
         $query = "SELECT * FROM $this->table_name WHERE email = '$email' AND password = '$password_vecchia'";
 
         $stmt = $this->conn->query($query);
-
-        if ($stmt->num_rows > 0) {
-            $query = "UPDATE $this->table_name SET password = '$password_nuova' WHERE email = '$email'";
-            $stmt = $this->conn->query($query);
-            return $stmt;
-        } else {
-            return false;
-        }
+        return $stmt;
     }
 
     function Registrazione($id, $password, $nome, $ruolo, $email)
