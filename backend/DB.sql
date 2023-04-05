@@ -2,7 +2,7 @@ CREATE DATABASE sistema_manutenzione;
 
 USE sistema_manutenzione;
 CREATE TABLE utente(
-    id_utente VARCHAR(6) PRIMARY KEY,
+    id_utente BIGINT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(40) NOT NULL,
     email VARCHAR(30) NOT NULL,
     password VARCHAR(256) NOT NULL,
@@ -11,7 +11,7 @@ CREATE TABLE utente(
 
 CREATE TABLE token(
     token VARCHAR(256) PRIMARY KEY,
-    id_utente VARCHAR(6) NOT NULL,
+    id_utente BIGINT NOT NULL,
     data_creazione DATETIME NOT NULL
 );
 CREATE TABLE ruolo(

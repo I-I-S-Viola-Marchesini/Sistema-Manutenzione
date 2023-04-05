@@ -22,15 +22,17 @@ class Persona
 
     function cambia_password($email, $password_vecchia, $password_nuova)
     {
-        $query = "SELECT * FROM $this->table_name WHERE email = '$email' AND password = '$password_vecchia'";
+        $query = "UPDATE $this->table_name 
+                  SET password = '$password_nuova'
+                  WHERE email = '$email' AND password = '$password_vecchia'";
 
         $stmt = $this->conn->query($query);
         return $stmt;
     }
 
-    function Registrazione($id, $password, $nome, $ruolo, $email)
+    function Registrazione($password, $nome, $ruolo, $email)
     {
-        $query = "INSERT INTO $this->table_name (id_utente, password, nome, ruolo, email) VALUES ('$id', '$password', '$nome', '$ruolo', '$email')";
+        $query = "INSERT INTO $this->table_name (password, nome, ruolo, email) VALUES ('$password', '$nome', '$ruolo', '$email')";
 
         $stmt = $this->conn->query($query);
 
