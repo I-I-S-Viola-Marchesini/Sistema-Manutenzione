@@ -20,7 +20,7 @@ $db = new Database();
 $db_conn = $db->connect();
 $user = new Persona($db_conn);
 
-$stmt = $user->Login($data->email, $data->password);
+$stmt = $user->Login($data->email, hash('sha256', $data->password));
 
 if ($stmt->num_rows > 0) {
     $row = $stmt->fetch_assoc();
