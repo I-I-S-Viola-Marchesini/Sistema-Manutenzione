@@ -70,7 +70,7 @@ CREATE TABLE controllo_esterno(
     id_tipo_controllo VARCHAR(7) NOT NULL, 
     esito_controllo BOOLEAN NOT NULL,
     irregolarita_riscontrate VARCHAR(100),
-    id_controllore VARCHAR(6) NOT NULL,
+    id_controllore BIGINT NOT NULL,
     firma VARCHAR(20) NOT NULL
 );
 CREATE TABLE manutenzione_esterno(
@@ -79,7 +79,7 @@ CREATE TABLE manutenzione_esterno(
     id_tipo_manutenzione VARCHAR(7) NOT NULL, 
     esito_manutenzione BOOLEAN NOT NULL,
     irregolarita_riscontrate VARCHAR(100),
-    id_controllore VARCHAR(6) NOT NULL,
+    id_controllore BIGINT NOT NULL,
     firma VARCHAR(20) NOT NULL
 );
 
