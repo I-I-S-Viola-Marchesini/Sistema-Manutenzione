@@ -26,7 +26,7 @@ const routes = {
     '/login': {
         'id': 'login',
         'page' : 'components/_login.php',
-        'script' : undefined,
+        'script' : 'scripts/_login.js',
         'title' : 'Login',
         'type' : 'page',
         'menu': ['offcanvas', 'navbar']
