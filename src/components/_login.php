@@ -5,18 +5,22 @@
                 <h1 class="text-center">Accedi</h1>
             </div>
             <div class="row">
+                <div class="alert d-none" role="alert" id="login_message">
+                </div>
                 <form>
                     <div class="mb-3">
-                        <label for="login_form_username" class="form-label">Username / Indirizzo Email</label>
-                        <input type="email" class="form-control" id="login_form_username">
+                        <label for="login_form_username" class="form-label">Indirizzo Email</label>
+                        <input type="email" id="login_form_email" class="form-control" data-toggle="login_form_email_popover" data-bs-trigger="focus" title="Popover Header" data-content="Some content inside the popover">
+                        <div class="list-group login-email-autocomplete rounded-top-0 bg-dark" id="login_form_autocomplete_list">
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="login_form_password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="login_form_password">
+                        <input type="password" id="login_form_password" class="form-control">
                     </div>
                     <div class="d-flex justify-content-between">
-                        <a href="/register.php" class="btn btn-link">Password dimenticata</a>
-                        <button type="submit" class="btn btn-primary">Accedi</button>
+                        <a id="forgot_password_button" class="btn btn-link">Password dimenticata</a>
+                        <button id="login_button" class="btn btn-primary">Accedi</button>
                     </div>
                 </form>
             </div>
