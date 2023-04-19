@@ -9,8 +9,10 @@
                 </div>
                 <form>
                     <div class="mb-3">
-                        <label for="login_form_username" class="form-label">Username / Indirizzo Email</label>
+                        <label for="login_form_username" class="form-label">Indirizzo Email</label>
                         <input type="email" id="login_form_email" class="form-control" data-toggle="login_form_email_popover" data-bs-trigger="focus" title="Popover Header" data-content="Some content inside the popover">
+                        <div class="list-group login-email-autocomplete rounded-top-0 bg-dark" id="login_form_autocomplete_list">
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="login_form_password" class="form-label">Password</label>

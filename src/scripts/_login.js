@@ -10,6 +10,38 @@ document.getElementById("forgot_password_button").addEventListener("click", func
     formEmail.popover();
 });
 
+formEmail.addEventListener('keyup', function () {
+    let knownDomains = [
+        "@iisviolamarchesini.edu.it",
+        "@gmail.com",
+    ];
+    let emailValue = "";
+    if(formEmail.value.includes("@")) emailValue = formEmail.value.replace(/.*@/, "@");
+    
+    let autocompleteList = document.getElementById("login_form_autocomplete_list");
+    autocompleteList.innerHTML = "";
+    formEmail.classList.remove("rounded-bottom-0");
+    
+    if(emailValue.length > 0){ 
+        for(let i = 0; i < knownDomains.length; i++){
+            if(knownDomains[i].startsWith(emailValue) && emailValue != knownDomains[i]){
+                //console.log("Domain found: " + knownDomains[i]);
+                formEmail.classList.add("rounded-bottom-0");
+                autocompleteList.innerHTML += "<a class=\"login-form-autocomplete-item list-group-item list-group-item-action cursor-pointer text-end\" style=\"cursor: pointer;\">" + knownDomains[i]  + "</a>";
+            }
+        }
+    }
+
+    document.querySelectorAll(".login-form-autocomplete-item").forEach(function (item) {
+        item.addEventListener("click", function () {
+            //autocomplete doamin
+            formEmail.value = formEmail.value.replace(/@.*/, "") + item.innerHTML;
+            autocompleteList.innerHTML = "";
+            formEmail.classList.remove("rounded-bottom-0");
+        });
+    });
+});
+ 
 function getLogin() {
 
     if(areFieldsEmpty()) {
