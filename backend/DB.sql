@@ -20,7 +20,7 @@ CREATE TABLE ruolo(
     descrizione VARCHAR(100)
 );
 CREATE TABLE impianto(
-    id_impianto INT PRIMARY KEY,
+    id_impianto INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(20) NOT NULL,
     descrizione VARCHAR(100),
     id_controllo VARCHAR(6) UNIQUE,
@@ -40,7 +40,8 @@ CREATE TABLE controllo_specifico(
 CREATE TABLE manutenzione_manutenzione_specifico(
     id_manutenzione_specifico VARCHAR(7),
     id_manutenzione VARCHAR(6),
-    descrizione VARCHAR(100)
+    descrizione VARCHAR(100),
+    ditta VARCHAR(30)
 );
 CREATE TABLE manutenzione_specifico(
     id_manutenzione VARCHAR(7) PRIMARY KEY,
