@@ -1,20 +1,18 @@
 <?php
 class Database
 {
-    private $server = "localhost";
-    private $user = "root";
-    private $password = "admin";
-    private $db = "sistema_manutenzione";
-    private $port = "3306";
     public $conn;
+    public $ConnectionData;
 
     public function connect()
     {
         try {
-            $this->conn = new mysqli($this->server, $this->user, $this->password, $this->db, $this->port);
+            $connectionData = json_decode(file_get_contents("connectionData.json", true), true);
+            $this->conn = new mysqli($connectionData['server'], $connectionData['user'], $connectionData['password'], $connectionData['database'], $connectionData['port']);
         } catch (Exception $ex) {
             die("Error connecting to database $ex\n\n");
         }
         return $this->conn;
     }
 }
+?>
