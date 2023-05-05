@@ -28,7 +28,7 @@ CREATE TABLE impianto(
 );
 CREATE TABLE controllo_controllo_specifico(
     id_controllo_specifico VARCHAR(7),
-    id_controllo VARCHAR(6),
+    id_controllo VARCHAR(6) AUTO_INCREMENT,
     descrizione VARCHAR(100)
 );
 CREATE TABLE controllo_specifico(
@@ -39,7 +39,7 @@ CREATE TABLE controllo_specifico(
 );
 CREATE TABLE manutenzione_manutenzione_specifico(
     id_manutenzione_specifico VARCHAR(7),
-    id_manutenzione VARCHAR(6),
+    id_manutenzione VARCHAR(6) AUTO_INCREMENT,
     descrizione VARCHAR(100),
     ditta VARCHAR(30)
 );
@@ -58,7 +58,7 @@ CREATE TABLE ticket_controllo(
     provvedimenti_adottati VARCHAR(100)
 );
 CREATE TABLE ticket_manutenzione(
-    id_ticket INT PRIMARY KEY,
+    id_ticket INT PRIMARY KEY AUTO_INCREMENT,
     id_manutenzione VARCHAR(7),
     inviato BOOLEAN,
     visto BOOLEAN,

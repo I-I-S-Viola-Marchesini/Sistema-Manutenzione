@@ -3,6 +3,7 @@ class Persona
 {
     protected $conn;
     protected $table_name = "utente";
+    protected $table_token = "token";
 
     public function __construct($db)
     {
