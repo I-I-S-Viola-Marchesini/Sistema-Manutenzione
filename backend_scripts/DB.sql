@@ -9,6 +9,15 @@ CREATE TABLE utente(
     ruolo INT NOT NULL
 );
 
+CREATE TABLE dati_smtp(
+    id_dati_smtp INT PRIMARY KEY AUTO_INCREMENT,
+    host VARCHAR(100) NOT NULL,
+    porta INT NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    nome_account VARCHAR(100) NOT NULL,
+    password VARCHAR(100) NOT NULL
+);
+
 CREATE TABLE token(
     token VARCHAR(256) PRIMARY KEY,
     id_utente BIGINT NOT NULL,

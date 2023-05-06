@@ -39,6 +39,14 @@ const routes = {
         'type' : '404error',
         'menu': []
     },
+    '/docs': {
+        'id': 'docs',
+        'page' : '/docs',
+        'script' : undefined,
+        'title' : 'Documentazione',
+        'type' : 'redirect',
+        'menu': ['navbar', 'offcanvas']
+    }
 };
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -97,6 +105,10 @@ function loadPage(route) {
             menuElement.classList.add("active");
         }
     });
+
+    if(routes[route].type == 'redirect'){
+        window.location.replace(routes[route].page);
+    }
 
     let pageRequest = new XMLHttpRequest();
     pageRequest.open("GET", routes[route].page, true);
