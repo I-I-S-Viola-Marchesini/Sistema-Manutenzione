@@ -10,11 +10,22 @@ class Persona
         $this->conn = $db;
     }
 
-    function Login($email, $password)
+    function login_email($email, $password)
     {
         $query = "SELECT id_utente 
         FROM $this->table_name 
         WHERE email = '$email' AND password = '$password'";
+
+        $stmt = $this->conn->query($query);
+
+        return $stmt;
+    }
+
+    function login_username($username, $password)
+    {
+        $query = "SELECT id_utente 
+        FROM $this->table_name 
+        WHERE username = '$username' AND password = '$password'";
 
         $stmt = $this->conn->query($query);
 

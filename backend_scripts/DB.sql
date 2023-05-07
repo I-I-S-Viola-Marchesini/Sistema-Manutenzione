@@ -4,6 +4,7 @@ USE sistema_manutenzione;
 CREATE TABLE utente(
     id_utente BIGINT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(40) NOT NULL,
+    username VARCHAR(20) NOT NULL,
     email VARCHAR(100) NOT NULL,
     password VARCHAR(256) NOT NULL,
     ruolo INT NOT NULL

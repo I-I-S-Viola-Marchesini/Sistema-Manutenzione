@@ -10,10 +10,10 @@ class User
         $this->conn = $db;
     }
 
-    public function create_user($name, $email, $password, $id_role)
+    public function create_user($name, $username, $email, $password, $id_role)
     {
-        $query = "INSERT INTO $this->table_user (nome, email, password, id_ruolo) 
-        VALUES ('$name', '$email', '$password', '$id_role')";
+        $query = "INSERT INTO $this->table_user (nome, username, email, password, id_ruolo) 
+        VALUES ('$name', '$username', '$email', '$password', '$id_role')";
 
         $stmt = $this->conn->query($query);
 
@@ -60,4 +60,3 @@ class User
         return $stmt;
     }
 }
-?>
