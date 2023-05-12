@@ -7,7 +7,7 @@ CREATE TABLE utente(
     username VARCHAR(20) NOT NULL,
     email VARCHAR(100) NOT NULL,
     password VARCHAR(256) NOT NULL,
-    ruolo INT NOT NULL
+    id_ruolo INT NOT NULL
 );
 
 CREATE TABLE dati_smtp(
