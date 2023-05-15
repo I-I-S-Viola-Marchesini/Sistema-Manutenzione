@@ -48,12 +48,22 @@ class User
         return $stmt;
     }
 
-    public function get_role($user_id)
+    public function get_role_by_id($user_id)
     {
         $query = "SELECT $this->table_role.id_ruolo 
         FROM $this->table_user 
         INNER JOIN $this->table_role ON $this->table_user.ruolo = $this->table_role.id_ruolo 
         WHERE id_utente = '$user_id'";
+
+        $stmt = $this->conn->query($query);
+
+        return $stmt;
+    }
+
+    public function get_role()
+    {
+        $query = "SELECT $this->table_role.id_ruolo, $this->table_role.nome
+        FROM $this->table_role";
 
         $stmt = $this->conn->query($query);
 

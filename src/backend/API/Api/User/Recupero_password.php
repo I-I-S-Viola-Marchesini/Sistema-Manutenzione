@@ -1,7 +1,7 @@
 <?php
-require("../Common/connect.php");
-require("../Model/Persona.php");
-require("../Model/Mailer.php");
+require("../../Common/connect.php");
+require("../../Model/Persona.php");
+require("../../Model/Mailer.php");
 
 
 //#####################################################################################
