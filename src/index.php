@@ -46,6 +46,16 @@ $loader = require_once __DIR__ . '/vendor/autoload.php';
         require_once $_SERVER['DOCUMENT_ROOT'] . '/scripts/pageSwitcher.js'
         ?>
     </script>
+    <script src="https://js.hcaptcha.com/1/api.js?hl=it" async defer></script>
+    <script>
+        function render_hCaptcha(elementId, execute) {
+            hcaptcha.render(elementId, {
+                sitekey: '7bc9ed94-9b8f-4fb5-9888-2b899b5e2bb1',
+                theme: 'light',
+            });
+            if(execute) hcaptcha.execute();
+        }
+    </script>
 </body>
 
 </html>

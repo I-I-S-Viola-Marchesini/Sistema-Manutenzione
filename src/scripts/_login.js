@@ -92,13 +92,13 @@ document.getElementById("controls_back").addEventListener("click", function () {
     }
 });
 
-function isUsernameValid(username){
+function isUsernameValid(username, onlyEmail = false){
     if(username == null || username == "" || username == undefined || username.length < 3){
-        return false;
-    }else if(!username.includes("@") && username.length > 40){
-        return false;
+        return false; // Controllo fallisce se username è null, undefined, vuoto o minore di 3 caratteri
     }else if((username.includes("@") && (username.length > 100 || !username.toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)))){
-        return false;
+        return false; // Controllo fallisce se username contiene @ e ha più di 100 caratteri o non è un indirizzo email valido
+    }else if(!username.includes("@") && (username.length > 40 || onlyEmail)){
+        return false; // Controllo fallisce se username non contiene @ e ha più di 40 caratteri (solo se onlyEmail è false)
     }
     return true;
 }
@@ -171,109 +171,48 @@ function showForm(element, speed, delay = 0){
     }
 }
 
-// //Nasconde un form
-// function slideHide(element, speed, delay = 0){
-//     element.style.animation = "slide_hide " + speed + " forwards";
-//     element.style.animationDelay = delay;
-// }
+const resetPasswordUseEmail = new bootstrap.Modal(document.getElementById('reset_password_use_email'));
+const resetPasswordCaptcha = new bootstrap.Modal(document.getElementById('reset_password_captcha'));
 
+document.getElementById("init_reset_password").addEventListener("click", function () {
+    if(!isUsernameValid(document.getElementById("login_form_email").value, true)){
+        document.getElementById("login_form_email").classList.add("is-invalid");
+        document.getElementById("login_form_email").focus({preventScroll: true});
+        resetPasswordUseEmail.show();
+        showForm(document.getElementById("username_input"), '0.5s');
+        return;
+    }
+    resetPasswordCaptcha.show();
+    render_hCaptcha('captcha_container', false);
+});
 
-// let formEmail = document.getElementById("login_form_email");
-// let formPassword = document.getElementById("login_form_password");
+document.getElementById("reset_password_captcha_submit").addEventListener("click", function () {
+    let captchaResponse = hcaptcha.getResponse();
+    console.log(captchaResponse);
+    if(captchaResponse == null || captchaResponse == "" || captchaResponse == undefined){
+        document.getElementById("captcha_container_error").classList.remove("d-none");
+        return;
+    }
 
-// document.getElementById("login_button").addEventListener("click", function () {
-//     var loginData = getLogin();
-//     console.log(loginData);
-// });
+    let resetData = {
+        "email": document.getElementById("login_form_email").value,
+        "type": "external_captcha",
+        "token": captchaResponse,
+    };
 
-// document.getElementById("forgot_password_button").addEventListener("click", function () {
-//     formEmail.popover();
-// });
-
-// formEmail.addEventListener('keyup', function () {
-//     let knownDomains = [
-//         "@iisviolamarchesini.edu.it",
-//         "@gmail.com",
-//     ];
-//     let emailValue = "";
-//     if(formEmail.value.includes("@")) emailValue = formEmail.value.replace(/.*@/, "@");
-    
-//     let autocompleteList = document.getElementById("login_form_autocomplete_list");
-//     autocompleteList.innerHTML = "";
-//     formEmail.classList.remove("rounded-bottom-0");
-    
-//     if(emailValue.length > 0){ 
-//         for(let i = 0; i < knownDomains.length; i++){
-//             if(knownDomains[i].startsWith(emailValue) && emailValue != knownDomains[i]){
-//                 //console.log("Domain found: " + knownDomains[i]);
-//                 formEmail.classList.add("rounded-bottom-0");
-//                 autocompleteList.innerHTML += "<a class=\"login-form-autocomplete-item list-group-item list-group-item-action cursor-pointer text-end\" style=\"cursor: pointer;\">" + knownDomains[i]  + "</a>";
-//             }
-//         }
-//     }
-
-//     document.querySelectorAll(".login-form-autocomplete-item").forEach(function (item) {
-//         item.addEventListener("click", function () {
-//             //autocomplete doamin
-//             formEmail.value = formEmail.value.replace(/@.*/, "") + item.innerHTML;
-//             autocompleteList.innerHTML = "";
-//             formEmail.classList.remove("rounded-bottom-0");
-//         });
-//     });
-// });
- 
-// function getLogin() {
-
-//     if(areFieldsEmpty()) {
-//         return;
-//     }
-
-//     formEmail.classList.remove("is-invalid");
-//     formPassword.classList.remove("is-invalid");
-
-//     var email = formEmail.value;
-//     var password = formPassword.value;
-
-//     let loginData = {
-//         "email": email,
-//         "password": password
-//     };
-
-//     let loginRequest = new XMLHttpRequest();
-//     loginRequest.open("POST", 'api/user/Login.php', true);
-//     loginRequest.setRequestHeader('Content-type', 'application/json');
-//     loginRequest.onreadystatechange = function () {
-//         if (loginRequest.readyState == 4 && loginRequest.status == 200) {
-//             showLoginMessage("Login successful. Redirecting...", "success");
-//         } else if (loginRequest.readyState == 4) {
-//             showLoginMessage("Login failed. Please try again.", "danger");
-//         }
-//     };
-//     loginRequest.send(JSON.stringify(loginData));
-// }
-
-// function areFieldsEmpty() {
-//     let result = false;
-
-//         if(formEmail.value == "" || formEmail.value == null) {
-//         formEmail.classList.add("is-invalid");
-//         showLoginMessage("Please fill in all fields.", "warning");
-//         result = true;
-//     }
-
-//     if(formPassword.value == "" || formPassword.value == null) {
-//         formPassword.classList.add("is-invalid");
-//         showLoginMessage("Please fill in all fields.", "warning");
-//         result = true;
-//     }
-
-//     return result;
-// }
-
-// function showLoginMessage(message, type) {
-//     document.getElementById("login_message").classList.remove("d-none");
-//     document.getElementById("login_message").classList.remove("alert-success");
-//     document.getElementById("login_message").classList.remove("alert-danger");
-//     document.getElementById("login_message").classList.add("alert-" + type);
-//     document.getElementById("login_message").innerHTML = message;
-// }
+    let resetRequest = new XMLHttpRequest();
+    resetRequest.open("POST", 'backend/API/Api/Recupero_password.php', true);
+    resetRequest.setRequestHeader('Content-type', 'application/json');
+    resetRequest.onreadystatechange = function () {
+        if (resetRequest.readyState == 4 && resetRequest.status == 200) {
+            window.location.replace("/#/dashboard");
+        } else if (resetRequest.readyState == 4 && resetRequest.status == 401) {
+            authErrorModal.show();
+            showForm(document.getElementById("username_input"), '0.5s');
+        } else if (resetRequest.readyState == 4 && (resetRequest.status == 400 || resetRequest.status == 500 || resetRequest.status == 404 || resetRequest.status == 403)) {
+            apiErrorModal.show();
+            showForm(document.getElementById("username_input"), '0.5s');
+        }
+    };
+    resetRequest.send(JSON.stringify(resetData));
+});

@@ -19,6 +19,11 @@ CREATE TABLE dati_smtp(
     password VARCHAR(100) NOT NULL
 );
 
+CREATE TABLE hcaptcha_sitekey(
+    id_hcaptcha_sitekey INT PRIMARY KEY AUTO_INCREMENT,
+    sitekey VARCHAR(100) NOT NULL
+);
+
 CREATE TABLE token(
     token VARCHAR(256) PRIMARY KEY,
     id_utente BIGINT NOT NULL,

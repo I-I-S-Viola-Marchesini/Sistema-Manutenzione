@@ -61,8 +61,9 @@
                             </button>
                         </div>
                     </div>
+
                     <div id="username_input">
-                        <div id="username_input_form" class="form-floating mb-5">
+                        <div class="form-floating mb-5">
                             <input type="email" class="form-control" tabindex="-1" id="login_form_email" placeholder="">
                             <label for="login_form_email">Indirizzo Email o Nome Utente</label>
                         </div>
@@ -70,17 +71,18 @@
                     </div>
 
                     <div id="password_input">
-                        <div id="password_input_form" class="form-floating mb-5">
+                        <div class="form-floating mb-5">
                             <input type="password" class="form-control" tabindex="-1" id="login_form_password" placeholder="">
                             <label for="login_form_email">Password</label>
                         </div>
                         <p id="login_form_password_error" class="text-danger d-none">Questa non è una password valida</p>
                         <div class="row mb-3">
-                            <a id="" class="link-primary" tabindex="-1" style="cursor: pointer;">
+                            <a id="init_reset_password" class="link-primary" tabindex="-1" style="cursor: pointer;">
                                 Resetta la password
                             </a>
                         </div>
                     </div>
+
                 </div>
             </div>
             <div id="controls_container" class="container shadow-lg bg-white rounded">
@@ -139,6 +141,51 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Riprova</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="reset_password_use_email" class="modal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Reset Password</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <b>La password non può essere resettata usando un nome utente.</b><br>
+                    <br><br>
+                    Inserisci l'indirizzo email associato al tuo account e riprova.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Chiudi</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="reset_password_captcha" class="modal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Reset Password</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Completa la verifica e clicca sul pulsante "Invia" per ricevere un link per resettare la password.<br>
+                </p>
+                <span id="captcha_container" class="d-flex justify-content-center"></span>
+                <p id="captcha_container_error" class="text-danger d-none">
+                    <br>
+                    Completa la verifica per continuare
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="reset_password_captcha_submit">Invia</button>
             </div>
         </div>
     </div>
