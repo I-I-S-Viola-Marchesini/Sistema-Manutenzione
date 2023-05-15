@@ -17,8 +17,10 @@ $db = new Database();
 $db_conn = $db->connect();
 $user = new Persona($db_conn);
 
+$hashed_password = hash('sha256', $data->password, false);
+
 if (strpos($data->email_user, "@") !== false) {
-    $stmt = $user->login_email($data->email_user, $data->password);
+    $stmt = $user->login_email($data->email_user, $hashed_password);
 
     if ($stmt->num_rows > 0) {
         $row = $stmt->fetch_assoc();
@@ -32,7 +34,7 @@ if (strpos($data->email_user, "@") !== false) {
         echo json_encode(["message" => "Wrong email or password"]);
     }
 } else if (strpos($data->email_user, "@") !== true) {
-    $stmt = $user->login_username($data->email_user, $data->password);
+    $stmt = $user->login_username($data->email_user, $hashed_password);
 
     if ($stmt->num_rows > 0) {
         $row = $stmt->fetch_assoc();

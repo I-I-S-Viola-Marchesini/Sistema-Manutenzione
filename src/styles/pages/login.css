@@ -1,0 +1,96 @@
+body {
+    background-image: url('/images/facciata_itis_viola.png');
+    background-size: cover;
+    background-position: center;
+}
+
+@media screen and (max-width: 992px) {
+    #full_image_background {
+        position: relative;
+        bottom: -25%;
+    }
+}
+
+#login_box {
+    max-width: 420px;
+}
+
+#form_container {
+    overflow: hidden;
+    display: grid;
+}
+
+#form_container>div {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+#controls_container {
+    max-width: 420px;
+}
+
+#header {
+    display: none;
+}
+
+#footer {
+    display: none;
+}
+
+#login_background_spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#saved_accounts {
+    position: relative;
+    top: 0;
+    right: -420px;
+}
+
+#username_input {
+    position: relative;
+    top: 0;
+    right: -420px;
+}
+
+#password_input {
+    position: relative;
+    top: 0;
+    right: -420px;
+}
+
+.btn.disabled {
+    opacity: 0 !important;
+    cursor: none !important;
+}
+
+a.disabled {
+    position: fixed !important;
+    top: -900% !important;
+}
+
+@-webkit-keyframes slide_show {
+    100% {
+        right: 0;
+    }
+}
+
+@keyframes slide_show {
+    100% {
+        right: 0;
+    }
+}
+
+@-webkit-keyframes slide_hide {
+    100% {
+        display: none;
+    }
+}
+
+@keyframes slide_hide {
+    100% {
+        display: none;
+    }
+}

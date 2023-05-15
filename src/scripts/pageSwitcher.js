@@ -120,6 +120,9 @@ function loadPage(route) {
             if (routes[route].script != undefined) {
                 let scriptRequest = new XMLHttpRequest();
                 scriptRequest.open("GET", routes[route].script, true);
+                scriptRequest.setRequestHeader('Cache-Control', 'no-cache, no-store, must-revalidate, max-age=0'); // No caching
+                scriptRequest.setRequestHeader('Pragma', 'no-cache'); // No caching
+                scriptRequest.setRequestHeader('Expires', 'Fri, 01 Jan 1990 00:00:00 GMT'); // Cache instantly expires
                 console.log("Requested script at: " + routes[route].script);
                 scriptRequest.onreadystatechange = function () {
                     if (scriptRequest.readyState == 4 && scriptRequest.status == 200) {
