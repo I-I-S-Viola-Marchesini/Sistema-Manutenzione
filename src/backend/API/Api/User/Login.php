@@ -1,6 +1,6 @@
 <?php
-require("../Common/connect.php");
-require("../Model/Persona.php");
+require("../../Common/connect.php");
+require("../../Model/Persona.php");
 
 header("Content-type: application/json; charset=UTF-8");
 header('Access-Control-Allow-Origin: *');
