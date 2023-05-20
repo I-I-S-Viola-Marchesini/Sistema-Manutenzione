@@ -75,24 +75,36 @@ window.addEventListener("hashchange", switcher, false);
 window.addEventListener("load", switcher, false);
 
 function switcher() {
-    let page = window.location.hash.substring(1);
+    let fullLoaction = window.location.hash.substring(1);
+
+    //select page before ?
+    let page = fullLoaction.split('?')[0];
+
+    //select parameters after ?
+    let parameters = "?" + fullLoaction.split('?')[1];
+
+    if(fullLoaction.split('?')[1] == undefined) parameters = '';
+
     if (page == ''){
         window.location.href = '#/';
         return;
     }
 
+    // alert("Switching to page: " + page);
+    // alert("Parameters: " + parameters);
+
     document.cookie = "page=" + page + "; path=/; sameSite=strict;";
 
     if (routes[page] == undefined) {
         console.log("Route (" + page + ") doesn't point to any page. Loading 404 page.")
-        loadPage('/404');
+        loadPage('/404', parameters);
         return;
     }else{
-        loadPage(page);
+        loadPage(page, parameters);
     }
 }
 
-function loadPage(route) {
+function loadPage(route, parameters) {
 
     let spinner = document.getElementById("spinner");
     spinner.classList.remove("d-none");
@@ -111,7 +123,7 @@ function loadPage(route) {
     }
 
     let pageRequest = new XMLHttpRequest();
-    pageRequest.open("GET", routes[route].page, true);
+    pageRequest.open("GET", routes[route].page + parameters, true);
     console.log("Requested page at: " + routes[route].page);
     pageRequest.onreadystatechange = function () {
         if (pageRequest.readyState == 4 && (pageRequest.status == 200 || routes[route].type == '404error')) {
