@@ -28,6 +28,7 @@ CREATE TABLE token(
     token VARCHAR(256) PRIMARY KEY,
     id_utente BIGINT NOT NULL,
     data_creazione DATETIME NOT NULL
+    data_ultima_attività DATETIME NOT NULL
 );
 CREATE TABLE ruolo(
     id_ruolo INT PRIMARY KEY,

@@ -120,7 +120,7 @@ function authenticate(UsernameInput, PasswordInput){
     };
 
     let loginRequest = new XMLHttpRequest();
-    loginRequest.open("POST", 'backend/API/api/Login.php', true);
+    loginRequest.open("POST", 'backend/API/Api/User/Login.php', true);
     loginRequest.setRequestHeader('Content-type', 'application/json');
     loginRequest.onreadystatechange = function () {
         if (loginRequest.readyState == 4 && loginRequest.status == 200) {

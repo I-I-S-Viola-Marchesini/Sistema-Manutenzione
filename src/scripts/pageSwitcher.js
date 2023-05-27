@@ -5,7 +5,7 @@ const routes = {
         'script' : undefined,
         'title' : 'Home',
         'type' : 'page',
-        'menu': ['navbar', 'offcanvas']
+        'menu': []
     },
     '/textEditor': {
         'id': 'textEditor',
