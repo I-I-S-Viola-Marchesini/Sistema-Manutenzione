@@ -1,5 +1,93 @@
 <link rel="stylesheet" href="styles/pages/login.css">
 
+<div id="auth_error_modal" class="modal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Impossibile continuare</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Controlla di aver inserito correttamente, username o indirizzo email e password.<br>
+                    Se hai dimenticato la password, resettala.
+                    <br><br>
+                    Se il problema persiste, contatta l'amministratore di sistema.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Riprova</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="api_error_modal" class="modal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Errore Interno</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    C'è stato un errore di comunicazione con il server e non è stato possibile completare l'operazione.<br>
+                    <br><br>
+                    Se il problema persiste, contatta l'amministratore di sistema.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Riprova</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="reset_password_use_email" class="modal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Reset Password</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <b>La password non può essere resettata usando un nome utente.</b><br>
+                    <br><br>
+                    Inserisci l'indirizzo email associato al tuo account e riprova.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Chiudi</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="reset_password_captcha" class="modal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Reset Password</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Completa la verifica e clicca sul pulsante "Invia" per ricevere un link per resettare la password.<br>
+                </p>
+                <span id="captcha_container" class="d-flex justify-content-center"></span>
+                <p id="captcha_container_error" class="text-danger d-none">
+                    <br>
+                    Completa la verifica per continuare
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="reset_password_captcha_submit">Invia</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="w-100" style="height: 100vh;">
     <div class="row h-100 p-0 m-0">
         <div class="col-12 p-3 d-flex flex-column justify-content-center align-items-center" style="background-color: rgba(125, 63, 248, 0.500);">
@@ -103,90 +191,3 @@
     </div>
 </div>
 
-<div id="auth_error_modal" class="modal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Impossibile continuare</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>
-                    Controlla di aver inserito correttamente, username o indirizzo email e password.<br>
-                    Se hai dimenticato la password, resettala.
-                    <br><br>
-                    Se il problema persiste, contatta l'amministratore di sistema.
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Riprova</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="api_error_modal" class="modal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Errore Interno</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>
-                    C'è stato un errore di comunicazione con il server e non è stato possibile completare l'operazione.<br>
-                    <br><br>
-                    Se il problema persiste, contatta l'amministratore di sistema.
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Riprova</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="reset_password_use_email" class="modal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Reset Password</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>
-                    <b>La password non può essere resettata usando un nome utente.</b><br>
-                    <br><br>
-                    Inserisci l'indirizzo email associato al tuo account e riprova.
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Chiudi</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="reset_password_captcha" class="modal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Reset Password</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>
-                    Completa la verifica e clicca sul pulsante "Invia" per ricevere un link per resettare la password.<br>
-                </p>
-                <span id="captcha_container" class="d-flex justify-content-center"></span>
-                <p id="captcha_container_error" class="text-danger d-none">
-                    <br>
-                    Completa la verifica per continuare
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="reset_password_captcha_submit">Invia</button>
-            </div>
-        </div>
-    </div>
-</div>

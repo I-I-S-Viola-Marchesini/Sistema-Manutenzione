@@ -15,7 +15,7 @@ $loader = require_once __DIR__ . '/vendor/autoload.php';
     <title>Sistema Manutenzione</title>
 </head>
 
-<body style="max-width: 100vw;">
+<body>
 
     <div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3 pt-5">
         <div id="sessionRefreshSuccess" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
@@ -29,9 +29,7 @@ $loader = require_once __DIR__ . '/vendor/autoload.php';
     </div>
 
 
-
-
-    <div class="modal" id="sessionExpiredModal" tabindex="-1">
+    <div class="modal" id="sessionExpiredModal" tabindex="-1" style="display: none;">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header bg-primary">
@@ -71,6 +69,7 @@ $loader = require_once __DIR__ . '/vendor/autoload.php';
             ?>
         </div>
     </div>
+
     <script>
         <?php
         require_once __DIR__ . '/vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js'

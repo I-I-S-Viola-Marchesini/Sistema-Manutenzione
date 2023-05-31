@@ -1,17 +1,6 @@
 let token = undefined;
 let session = undefined;
 
-let sessionExpiredModal = new bootstrap.Modal(document.getElementById('sessionExpiredModal'), {
-    keyboard: false,
-    backdrop: 'static'
-});
-
-let sessionRefreshSuccess = new bootstrap.Toast(document.getElementById('sessionRefreshSuccess'), {
-    animation: true,
-    autohide: true,
-    delay: 5000
-});
-
 let checkSessionData = function() {
 
     let lastSessionId = Cookies.get("sessionId");
@@ -24,6 +13,7 @@ let checkSessionData = function() {
 
         if ((lastSessionId != currentSessionId) || (lastToken != currentToken)) {
 
+            loadLoginButtons();
             SessionManager();
 
             lastSessionId = currentSessionId;
@@ -40,6 +30,17 @@ window.addEventListener("load", SessionManager, false);
 window.addEventListener("DOMContentLoaded", function () {
     loadLoginButtons();
     SessionManager();
+});
+
+let sessionExpiredModal = new bootstrap.Modal(document.getElementById('sessionExpiredModal'), {
+    keyboard: false,
+    backdrop: 'static'
+});
+
+let sessionRefreshSuccess = new bootstrap.Toast(document.getElementById('sessionRefreshSuccess'), {
+    animation: true,
+    autohide: true,
+    delay: 5000
 });
 
 function SessionManager() {
@@ -74,6 +75,7 @@ function SessionManager() {
 
     if (isValidKey(token) && !isValidKey(session)) {
         if(page == '/login') return;
+
         blurContent(15);
         sessionExpiredModal.show();
         return;
@@ -88,6 +90,13 @@ function SessionManager() {
 
 function blurContent(px) {
     document.querySelectorAll(".blurrable").forEach(function (element) {
+        if(px == 0) {
+            document.body.style.userSelect = "auto";
+            element.style.filter = "none";
+            element.style.webkitFilter = "none";
+            return;
+        }
+        document.body.style.userSelect = "none";
         element.style.filter = "blur(" + px + "px)";
         element.style.webkitFilter = "blur(" + px + "px)";
     }
@@ -112,21 +121,17 @@ function loadLoginButtons() {
 
         element.addEventListener("click", function () {
             openAuthPopup(element);
-        }, { once: true });
+        });
     });
 }
 
 function openAuthPopup(element) {
 
-    console.log("openAuthPopup");
-
     // let spinner = document.getElementById("spinner");
     // spinner.classList.remove("d-none");
 
-    const innerHTML = element.innerHTML;
     let id = element.getAttribute("data-id");
 
-    element.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Autenticazione...';
     element.classList.add("btn-secondary");
 
     const popupCenter = ({ url, title, w, h }) => {
@@ -156,22 +161,19 @@ function openAuthPopup(element) {
         //     alert("load");
         // });
 
-        newWindow.addEventListener('close', function () {
-            console.log("close");
-        });
-
-        newWindow.addEventListener('beforeunload', function () {
-            alert("beforeunload");
-            element.innerHTML = innerHTML;
-            element.classList.remove("btn-secondary");
-            loadLoginButtons();
-            //SessionManager();
-            if (isValidKey(Cookies.get("sessionId")) && Cookies.get("sessionId") != session) {
-                SessionManager();
-                sessionRefreshSuccess.show();
+        var timer = setInterval(function() { 
+            if(newWindow.closed) {
+                clearInterval(timer);
+                element.classList.remove("btn-secondary");
+                loadLoginButtons();
+                //SessionManager();
+                if (isValidKey(Cookies.get("sessionId")) && Cookies.get("sessionId") != session) {
+                    SessionManager();
+                    sessionRefreshSuccess.show();
+                }
             }
-        }
-        );
+        }, 100);
+
     }
 
     popupCenter({ url: '/#/login?type=popup', title: 'Login - ' + id, w: 600, h: 700 });

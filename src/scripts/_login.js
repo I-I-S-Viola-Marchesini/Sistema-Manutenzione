@@ -27,12 +27,12 @@ let fullLoaction = window.location.hash.substring(1);
 let parameters = "?" + fullLoaction.split('?')[1];
 const urlParams = new URLSearchParams(parameters);
 
-window.addEventListener("message", function(event) {
+// window.addEventListener("message", function(event) {
   
-    console.log(event.data); // "hello there!"
+//     console.log(event.data); // "hello there!"
   
-    // can message back using event.source.postMessage(...)
-});
+//     // can message back using event.source.postMessage(...)
+// });
 
 //showForm(document.getElementById("saved_accounts"), '0.5s', '0.3s');
 showForm(document.getElementById("username_input"), '0.5s', '0.3s');

@@ -4,12 +4,12 @@ body {
     background-position: center;
 }
 
-@media screen and (max-width: 992px) {
+/* @media screen and (max-width: 992px) {
     #full_image_background {
         position: relative;
         bottom: -25%;
     }
-}
+} */
 
 #login_box {
     max-width: 420px;
