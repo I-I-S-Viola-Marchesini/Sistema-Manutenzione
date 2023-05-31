@@ -21,9 +21,22 @@ const messages = {
 
 let currentForm = undefined;
 
+let fullLoaction = window.location.hash.substring(1);
+
+//select parameters after ?
+let parameters = "?" + fullLoaction.split('?')[1];
+const urlParams = new URLSearchParams(parameters);
+
+window.addEventListener("message", function(event) {
+  
+    console.log(event.data); // "hello there!"
+  
+    // can message back using event.source.postMessage(...)
+});
+
 //showForm(document.getElementById("saved_accounts"), '0.5s', '0.3s');
 showForm(document.getElementById("username_input"), '0.5s', '0.3s');
-document.getElementById("login_form_email").focus({preventScroll: true});
+//document.getElementById("login_form_email").focus({ preventScroll: true });
 
 window.onkeyup = function (event) {
     if (event.key == "Enter") {
@@ -42,27 +55,27 @@ window.onkeydown = function (event) {
 }
 
 document.getElementById("controls_next").addEventListener("click", function () {
-    switch(currentForm.id){
+    switch (currentForm.id) {
         case "username_input":
             //check if input is email or username
             let UsernameInput = document.getElementById("login_form_email").value;
-            if(!isUsernameValid(UsernameInput)){
+            if (!isUsernameValid(UsernameInput)) {
                 document.getElementById("login_form_email").classList.add("is-invalid");
-                document.getElementById("login_form_email").focus({preventScroll: true});
+                document.getElementById("login_form_email").focus({ preventScroll: true });
                 document.getElementById("login_form_email_error").classList.remove("d-none");
                 return;
             }
             document.getElementById("login_form_email").classList.remove("is-invalid");
             document.getElementById("login_form_email_error").classList.add("d-none");
             showForm(document.getElementById("password_input"), '0.5s');
-            document.getElementById("login_form_password").focus({preventScroll: true})
+            document.getElementById("login_form_password").focus({ preventScroll: true })
             break; //non necessario, ma per sicurezza...
         case "password_input":
             //check if input is password
             let PasswordInput = document.getElementById("login_form_password").value;
-            if(!isPasswordValid(PasswordInput)){
+            if (!isPasswordValid(PasswordInput)) {
                 document.getElementById("login_form_password").classList.add("is-invalid");
-                document.getElementById("login_form_password").focus({preventScroll: true});
+                document.getElementById("login_form_password").focus({ preventScroll: true });
                 document.getElementById("login_form_password_error").classList.remove("d-none");
                 return;
             }
@@ -78,9 +91,10 @@ document.getElementById("controls_next").addEventListener("click", function () {
 });
 
 document.getElementById("controls_back").addEventListener("click", function () {
-    switch(currentForm.id){
+    switch (currentForm.id) {
         case "username_input":
             history.back();
+            if (urlParams.get('type') == 'popup') window.close();
             break;
         case "password_input":
             showForm(document.getElementById("username_input"), '0.5s');
@@ -92,19 +106,19 @@ document.getElementById("controls_back").addEventListener("click", function () {
     }
 });
 
-function isUsernameValid(username, onlyEmail = false){
-    if(username == null || username == "" || username == undefined || username.length < 3){
+function isUsernameValid(username, onlyEmail = false) {
+    if (username == null || username == "" || username == undefined || username.length < 3) {
         return false; // Controllo fallisce se username è null, undefined, vuoto o minore di 3 caratteri
-    }else if((username.includes("@") && (username.length > 100 || !username.toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)))){
+    } else if ((username.includes("@") && (username.length > 100 || !username.toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)))) {
         return false; // Controllo fallisce se username contiene @ e ha più di 100 caratteri o non è un indirizzo email valido
-    }else if(!username.includes("@") && (username.length > 40 || onlyEmail)){
+    } else if (!username.includes("@") && (username.length > 40 || onlyEmail)) {
         return false; // Controllo fallisce se username non contiene @ e ha più di 40 caratteri (solo se onlyEmail è false)
     }
     return true;
 }
 
-function isPasswordValid(password){
-    if(password == null || password == "" || password == undefined || password.length < 8){
+function isPasswordValid(password) {
+    if (password == null || password == "" || password == undefined || password.length < 8) {
         return false;
     }
     return true;
@@ -113,7 +127,7 @@ function isPasswordValid(password){
 const authErrorModal = new bootstrap.Modal(document.getElementById('auth_error_modal'));
 const apiErrorModal = new bootstrap.Modal(document.getElementById('api_error_modal'));
 
-function authenticate(UsernameInput, PasswordInput){
+function authenticate(UsernameInput, PasswordInput) {
     let loginData = {
         "email_user": UsernameInput.value,
         "password": PasswordInput.value,
@@ -124,7 +138,18 @@ function authenticate(UsernameInput, PasswordInput){
     loginRequest.setRequestHeader('Content-type', 'application/json');
     loginRequest.onreadystatechange = function () {
         if (loginRequest.readyState == 4 && loginRequest.status == 200) {
+
+            window.localStorage.setItem("token", '4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a');
+            //window.localStorage.setItem("status", "logged_in");
+            Cookies.set("sessionId", "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce", { path: '/', sameSite: 'strict'});
+            
+            if(urlParams.get('type') == 'popup') {
+                window.close();
+                return;
+            }
+
             window.location.replace("/#/dashboard");
+            
         } else if (loginRequest.readyState == 4 && loginRequest.status == 401) {
             authErrorModal.show();
             showForm(document.getElementById("username_input"), '0.5s');
@@ -137,9 +162,9 @@ function authenticate(UsernameInput, PasswordInput){
 }
 
 //Mostra un form
-function showForm(element, speed, delay = 0){
+function showForm(element, speed, delay = 0) {
 
-    if(currentForm != undefined){
+    if (currentForm != undefined) {
         //Nasconde il form precedente
         currentForm.style.animation = "slide_hide 0s forwards";
         currentForm.style.animationDelay = delay;
@@ -158,15 +183,15 @@ function showForm(element, speed, delay = 0){
     document.getElementById("controls_back_text").innerHTML = messages[element.id]["controls_back"];
     document.getElementById("controls_next").innerHTML = messages[element.id]["controls_next"];
 
-    if(messages[element.id]["controls_next"] != null){
+    if (messages[element.id]["controls_next"] != null) {
         document.getElementById("controls_next").classList.remove("disabled");
-    }else{
+    } else {
         document.getElementById("controls_next").classList.add("disabled");
     }
 
-    if(messages[element.id]["controls_back"] != null){
+    if (messages[element.id]["controls_back"] != null) {
         document.getElementById("controls_back").classList.remove("disabled");
-    }else{
+    } else {
         document.getElementById("controls_back").classList.add("disabled");
     }
 }
@@ -175,9 +200,9 @@ const resetPasswordUseEmail = new bootstrap.Modal(document.getElementById('reset
 const resetPasswordCaptcha = new bootstrap.Modal(document.getElementById('reset_password_captcha'));
 
 document.getElementById("init_reset_password").addEventListener("click", function () {
-    if(!isUsernameValid(document.getElementById("login_form_email").value, true)){
+    if (!isUsernameValid(document.getElementById("login_form_email").value, true)) {
         document.getElementById("login_form_email").classList.add("is-invalid");
-        document.getElementById("login_form_email").focus({preventScroll: true});
+        document.getElementById("login_form_email").focus({ preventScroll: true });
         resetPasswordUseEmail.show();
         showForm(document.getElementById("username_input"), '0.5s');
         return;
@@ -189,7 +214,7 @@ document.getElementById("init_reset_password").addEventListener("click", functio
 document.getElementById("reset_password_captcha_submit").addEventListener("click", function () {
     let captchaResponse = hcaptcha.getResponse();
     console.log(captchaResponse);
-    if(captchaResponse == null || captchaResponse == "" || captchaResponse == undefined){
+    if (captchaResponse == null || captchaResponse == "" || captchaResponse == undefined) {
         document.getElementById("captcha_container_error").classList.remove("d-none");
         return;
     }

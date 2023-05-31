@@ -25,11 +25,19 @@ CREATE TABLE hcaptcha_sitekey(
 );
 
 CREATE TABLE token(
-    token VARCHAR(256) PRIMARY KEY,
+    id_token INT PRIMARY KEY AUTO_INCREMENT,
+    token VARCHAR(256) NOT NULL,
     id_utente BIGINT NOT NULL,
-    data_creazione DATETIME NOT NULL
-    data_ultima_attività DATETIME NOT NULL
+    data_creazione DATETIME NOT NULL,
+    data_ultima_attivita DATETIME NOT NULL
 );
+
+CREATE TABLE session(
+    session_id VARCHAR(256) PRIMARY KEY,
+    id_token INT NOT NULL,
+    data_creazione DATETIME NOT NULL
+);
+
 CREATE TABLE ruolo(
     id_ruolo INT PRIMARY KEY,
     nome VARCHAR(20) NOT NULL,

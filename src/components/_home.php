@@ -14,7 +14,7 @@
                 La gestione di manutenzione e sicurezza per il Viola Marchesini
             </h5>
             <div class="d-flex justify-content-center align-items-center">
-                <h4><a href="/#/login" class="btn btn-primary m-3">Accedi al portale</a></h4>
+                <h4><a style="cursor: pointer;" data-target="login" login-popup-id="1" class="btn btn-primary m-3">Accedi al portale</a></h4>
             </div>
         </div>
         <div class="col-12 col-lg-5 bg-primary-subtle rounded-3 shadow p-3">

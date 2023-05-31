@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="styles/pages/login.css">
 
 <div class="w-100" style="height: 100vh;">
-    <div class="row h-100">
+    <div class="row h-100 p-0 m-0">
         <div class="col-12 p-3 d-flex flex-column justify-content-center align-items-center" style="background-color: rgba(125, 63, 248, 0.500);">
             <div class="align-items-center mb-3">
                 <div class="row text-light m-2">

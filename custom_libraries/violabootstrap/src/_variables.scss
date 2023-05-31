@@ -17,6 +17,17 @@ $danger: $red;
 $light: $light-color;
 $dark: $dark-color;
 
+$theme-colors: (
+    "primary": $primary,
+    "secondary": $secondary,
+    "success": $success,
+    "info": $info,
+    "warning": $warning,
+    "danger": $danger,
+    "light": $light,
+    "dark": $dark
+);
+
 $primary-text: $primary;
 $secondary-text: $secondary;
 $success-text: $success;
@@ -47,7 +58,7 @@ $dark-border-subtle: lighten($dark, 15%);
 $navbar-light-toggler-border-color: transparent;
 $navbar-light-toggler-icon-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='#{$light}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>");
 
-a.navbar-brand{
+a.navbar-brand {
     border-right: 1px solid $light-color;
     padding-right: 10px;
 }
