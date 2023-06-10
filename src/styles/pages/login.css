@@ -1,15 +1,17 @@
 body {
     background-image: url('../../images/facciata_itis_viola.png');
     background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     background-position: center;
 }
 
-/* @media screen and (max-width: 992px) {
+@media screen and (max-width: 992px) {
     #full_image_background {
         position: relative;
         bottom: -25%;
     }
-} */
+}
 
 #login_box {
     max-width: 420px;
@@ -61,6 +63,12 @@ body {
     right: -420px;
 }
 
+#tfa_input {
+    position: relative;
+    top: 0;
+    right: -420px;
+}
+
 .btn.disabled {
     opacity: 0 !important;
     cursor: none !important;
@@ -93,4 +101,21 @@ a.disabled {
     100% {
         display: none;
     }
+}
+
+.tfa_code_input {
+    font-family: monospace;
+    font-size: 2.5rem;
+    border: none;
+    outline: none;
+    padding: 0;
+    width: calc(1.6ch * 6);
+    background: repeating-linear-gradient(90deg, black 0, black 1ch, transparent 0, transparent 1.6ch) 0 100%/100% 2px no-repeat;
+    color: rgb(0, 0, 0);
+    letter-spacing: .6ch;
+}
+
+.tfa_code_input.is-invalid {
+    color: #f33737;
+    background: repeating-linear-gradient(90deg, #f33737 0, #f33737 1ch, transparent 0, transparent 1.6ch) 0 100%/100% 2px no-repeat;
 }

@@ -26,15 +26,25 @@ CREATE TABLE hcaptcha_sitekey(
 
 CREATE TABLE token(
     id_token INT PRIMARY KEY AUTO_INCREMENT,
-    token VARCHAR(256) NOT NULL,
+    token VARCHAR(256) NOT NULL UNIQUE,
     id_utente BIGINT NOT NULL,
     data_creazione DATETIME NOT NULL,
     data_ultima_attivita DATETIME NOT NULL
 );
 
 CREATE TABLE session(
-    session_id VARCHAR(256) PRIMARY KEY,
+    id_session INT PRIMARY KEY AUTO_INCREMENT,
+    `session` VARCHAR(256) NOT NULL UNIQUE,
     id_token INT NOT NULL,
+    data_creazione DATETIME NOT NULL
+);
+
+CREATE TABLE 2fa(
+    id_2fa INT PRIMARY KEY AUTO_INCREMENT,
+    user_id BIGINT NOT NULL,
+    `secret` VARCHAR(64) NOT NULL,
+    token VARCHAR(64) NOT NULL,
+    `session` VARCHAR(64) NOT NULL,
     data_creazione DATETIME NOT NULL
 );
 

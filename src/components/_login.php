@@ -161,13 +161,40 @@
                     <div id="password_input">
                         <div class="form-floating mb-5">
                             <input type="password" class="form-control" tabindex="-1" id="login_form_password" placeholder="">
-                            <label for="login_form_email">Password</label>
+                            <label for="login_form_password">Password</label>
                         </div>
                         <p id="login_form_password_error" class="text-danger d-none">Questa non è una password valida</p>
                         <div class="row mb-3">
                             <a id="init_reset_password" class="link-primary" tabindex="-1" style="cursor: pointer;">
                                 Resetta la password
                             </a>
+                        </div>
+                    </div>
+
+                    <div id="tfa_input">
+                        <div class="row mb-5 d-flex justify-content-center align-items-center">
+                            <input type="text" id="login_form_tfa" class="tfa_code_input" pattern="\d*" maxlength="6" inputMode="numeric" autocomplete="off" />
+                        </div>
+                        <!-- <div class="form-floating mb-4">
+                        <input type="number" class="form-control" tabindex="-1" id="login_form_tfa" placeholder="">
+                        <label for="login_form_tfa">Codice di verifica</label>
+                        </div> -->
+                        <p id="login_form_tfa_error" class="text-danger d-none">Il codice di verifica è errato</p>
+                        <div class="bg-primary-subtle mb-3 rounded-3 d-flex flex-column justify-content-center align-items-center position-relative">
+                            <span class="position-absolute top-0 start-50 translate-middle badge rounded-pill text-dark bg-primary-subtle" title="Tempo rimanente">
+                                <span id="tfa_time_left">00:00</span>
+                                <span class="visually-hidden">tempo rimanente</span>
+                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-envelope-check mt-3" viewBox="0 0 16 16">
+                                <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2H2Zm3.708 6.208L1 11.105V5.383l4.708 2.825ZM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2-7-4.2Z" />
+                                <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-1.993-1.679a.5.5 0 0 0-.686.172l-1.17 1.95-.547-.547a.5.5 0 0 0-.708.708l.774.773a.75.75 0 0 0 1.174-.144l1.335-2.226a.5.5 0 0 0-.172-.686Z" />
+                            </svg>
+                            <p class="text-center mt-2">
+                                Il codice ti è stato inviato via email.
+                                <small>
+                                    <br>Se non lo trovi, controlla la cartella dello spam.
+                                </small>
+                            </p>
                         </div>
                     </div>
 
@@ -190,4 +217,3 @@
         </div>
     </div>
 </div>
-
