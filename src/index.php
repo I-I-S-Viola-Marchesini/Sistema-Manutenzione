@@ -8,8 +8,8 @@ $loader = require_once __DIR__ . '/vendor/autoload.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/styles/bootstrap/custom.css" rel="stylesheet">
-    <script src="/vendor/tinymce/tinymce/tinymce.min.js"></script>
+    <link href="styles/bootstrap/custom.css" rel="stylesheet">
+    <script src="vendor/tinymce/tinymce/tinymce.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js" integrity="sha256-WCzAhd2P6gRJF9Hv3oOOd+hFJi/QJbv+Azn4CGB8gfY=" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
     <title>Sistema Manutenzione</title>
@@ -39,8 +39,10 @@ $loader = require_once __DIR__ . '/vendor/autoload.php';
                     <p class="text-dark text-center">
                         Questa sessione è scaduta, per favore conferma l'accesso per continuare ad utilizzare il portale.
                     </p>
-                    <div class="d-flex justify-content-center align-items-center">
-                        <h4><a style="cursor: pointer;" data-target="login" login-popup-id="sessionExpiredModal_btn" class="btn btn-primary m-3">Accedi nuovamente</a></h4>
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <h4><a style="cursor: pointer;" data-target="login" login-popup-id="sessionExpiredModal_btn" class="btn btn-primary mt-3">Accedi nuovamente</a></h4>
+                        <p class="text-muted m-2">oppure</p>
+                        <a style="cursor: pointer;" data-target="logout" class="text-primary mb-3">Esci da questo account</a>
                     </div>
                 </div>
             </div>
@@ -60,7 +62,7 @@ $loader = require_once __DIR__ . '/vendor/autoload.php';
                     <span class="visually-hidden">Loading...</span>
                 </div>
             </div>
-            <div class="col-12 p-0 blurrable" style="min-height: 70vh;" id="contents">
+            <div class="col-12 p-0 blurrable" style="min-height: 80vh;" id="contents">
             </div>
         </div>
         <div class="row blurrable" id="footer">
@@ -77,8 +79,9 @@ $loader = require_once __DIR__ . '/vendor/autoload.php';
     </script>
     <script>
         <?php
-        require_once $_SERVER['DOCUMENT_ROOT'] . '/scripts/sessionManager.js';
-        require_once $_SERVER['DOCUMENT_ROOT'] . '/scripts/pageSwitcher.js';
+        require_once __DIR__ . '/scripts/routes.js';
+        require_once __DIR__ . '/scripts/sessionManager.js';
+        require_once __DIR__ . '/scripts/pageSwitcher.js';
         ?>
     </script>
     <script src="https://js.hcaptcha.com/1/api.js?hl=it" async defer></script>

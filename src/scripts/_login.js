@@ -148,7 +148,7 @@ function authenticate(UsernameInput, PasswordInput) {
                 return;
             }
 
-            window.location.replace("/#/dashboard");
+            window.location.replace("#/dashboard");
             
         } else if (loginRequest.readyState == 4 && loginRequest.status == 401) {
             authErrorModal.show();
@@ -230,7 +230,7 @@ document.getElementById("reset_password_captcha_submit").addEventListener("click
     resetRequest.setRequestHeader('Content-type', 'application/json');
     resetRequest.onreadystatechange = function () {
         if (resetRequest.readyState == 4 && resetRequest.status == 200) {
-            window.location.replace("/#/dashboard");
+            window.location.replace("#/dashboard");
         } else if (resetRequest.readyState == 4 && resetRequest.status == 401) {
             authErrorModal.show();
             showForm(document.getElementById("username_input"), '0.5s');

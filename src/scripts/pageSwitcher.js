@@ -1,66 +1,9 @@
-const routes = {
-    '/': {
-        'id': 'home',
-        'page': 'components/_home.php',
-        'script': undefined,
-        'title': 'Home',
-        'type': 'page',
-        'menu': []
-    },
-    '/dashboard': {
-        'id': 'dashboard',
-        'page': 'components/_dashboard.php',
-        'script': 'scripts/_dashboard.js',
-        'title': 'Dashboard',
-        'type': 'page',
-        'menu': ['navbar', 'offcanvas']
-    },
-    '/textEditor': {
-        'id': 'textEditor',
-        'page': 'components/_editorTest.php',
-        'script': 'scripts/_textEditors.js',
-        'title': 'Text Editor',
-        'type': 'page',
-        'menu': ['navbar']
-    },
-    '/bootstrap': {
-        'id': 'bootstrap',
-        'page': 'components/_bstemp.php',
-        'script': undefined,
-        'title': 'Bootstrap',
-        'type': 'page',
-        'menu': ['navbar', 'offcanvas'],
-    },
-    '/login': {
-        'id': 'login',
-        'page': 'components/_login.php',
-        'script': 'scripts/_login.js',
-        'title': 'Login',
-        'type': 'page',
-        'menu': ['offcanvas', 'navbar']
-    },
-    '/404': {
-        'id': '404',
-        'page': 'components/_404.php',
-        'script': undefined,
-        'title': 'Errore 404',
-        'type': '404error',
-        'menu': []
-    },
-    '/docs': {
-        'id': 'docs',
-        'page': '/docs',
-        'script': undefined,
-        'title': 'Documentazione',
-        'type': 'redirect',
-        'menu': ['navbar', 'offcanvas']
-    }
-};
-
 document.addEventListener("DOMContentLoaded", function () {
 
     let navbar = document.getElementById("menu_navbar");
     let offcanvas = document.getElementById("menu_offcanvas");
+    let footerAccount = document.getElementById("menu_footer_account");
+    let footerManagement = document.getElementById("menu_footer_management");
 
     function navbar_item_template(route) {
         return '<li class="nav-item"><a class="nav-link menu-route" href="#' + route + '" route-id="' + routes[route].id + '">' + routes[route].title + '</a></li>';
@@ -70,12 +13,23 @@ document.addEventListener("DOMContentLoaded", function () {
         return '<a href="#' + route + '" class="list-group-item list-group-item-action menu-route" route-id="' + routes[route].id + '">' + routes[route].title + '</a>';
     }
 
+    function footer_item_template(route) {
+        return '<li class="nav-item mb-2"><a href="#' + route + '" class="nav-link p-0 text-body-secondary">' + routes[route].title + '</a></li>'
+        //return '<a href="#' + route + '" class="dropdown-item menu-route" route-id="' + routes[route].id + '">' + routes[route].title + '</a>';
+    }
+
     for (let route in routes) {
         if (routes[route].menu.includes('navbar')) {
             navbar.innerHTML += navbar_item_template(route);
         }
         if (routes[route].menu.includes('offcanvas')) {
             offcanvas.innerHTML += offcanvas_item_template(route);
+        }
+        if (routes[route].menu.includes('footer_account')) {
+            footerAccount.innerHTML += footer_item_template(route);
+        }
+        if (routes[route].menu.includes('footer_management')) {
+            footerManagement.innerHTML += footer_item_template(route);
         }
     }
 });
@@ -104,6 +58,11 @@ function switcher() {
     // alert("Parameters: " + parameters);
 
     if (routes[page] == undefined) {
+        if(aliases[page] != undefined){
+            console.log("Route (" + page + ") is an alias. Redirecting to: " + aliases[page]);
+            window.location.href = '#' + aliases[page];
+            return;
+        }
         console.log("Route (" + page + ") doesn't point to any page. Loading 404 page.")
         loadPage('/404', parameters);
         return;

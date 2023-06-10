@@ -78,10 +78,12 @@ function SessionManager() {
 
         blurContent(15);
         sessionExpiredModal.show();
+        loadLoginButtons();
         return;
     }
 
     if (!isValidKey(token)) {
+        if(routes[page].auth == 'none') return;
         window.location.href = '#/login';
         return;
     }
@@ -122,6 +124,16 @@ function loadLoginButtons() {
         element.addEventListener("click", function () {
             openAuthPopup(element);
         });
+    });
+
+    document.querySelectorAll("[data-target='logout']").forEach(function (element) {
+
+        element.classList.remove("disabled");
+
+        element.addEventListener("click", function () {
+            userLogout();
+        });
+        
     });
 }
 
@@ -176,7 +188,13 @@ function openAuthPopup(element) {
 
     }
 
-    popupCenter({ url: '/#/login?type=popup', title: 'Login - ' + id, w: 600, h: 700 });
+    popupCenter({ url: '#/login?type=popup', title: 'Login - ' + id, w: 600, h: 700 });
 
 
+}
+
+function userLogout(){
+    localStorage.removeItem("token");
+    Cookies.remove("sessionId");
+    window.location.href = '#/login';
 }
