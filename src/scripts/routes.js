@@ -10,12 +10,30 @@ const routes = {
     },
     '/dashboard': {
         'id': 'dashboard',
-        'page': 'components/_dashboard.php',
-        'script': 'scripts/_dashboard.js',
+        'page': '#/dashboard/anagrafica',
+        'script': undefined,
         'title': 'Dashboard',
+        'type': 'redirect',
+        'auth': 'none',
+        'menu': ['navbar', 'offcanvas', 'footer_management']
+    },
+    '/dashboard/anagrafica': {
+        'id': 'anagrafica',
+        'page': 'components/dashboard/_dashboard.php?tab=anagrafica',
+        'script': ['scripts/dashboard/_dashboard.js', 'scripts/dashboard/_anagrafica.js'],
+        'title': 'Anagrafica',
         'type': 'page',
         'auth': 'user',
-        'menu': ['navbar', 'offcanvas']
+        'menu': ['navbar', 'offcanvas', 'footer_account', 'dashboard_sidebar']
+    },
+    '/dashboard/sicurezza': {
+        'id': 'sicurezza',
+        'page': 'components/dashboard/_dashboard.php?tab=sicurezza',
+        'script': ['scripts/dashboard/_dashboard.js', 'scripts/dashboard/_sicurezza.js'],
+        'title': 'Sicurezza',
+        'type': 'page',
+        'auth': 'user',
+        'menu': ['navbar', 'offcanvas', 'footer_account', 'dashboard_sidebar']
     },
     '/textEditor': {
         'id': 'textEditor',

@@ -1,9 +1,26 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", switcher, false);
+window.addEventListener("hashchange", switcher, false);
+window.addEventListener("load", switcher, false);
+
+function switcher() {
 
     let navbar = document.getElementById("menu_navbar");
     let offcanvas = document.getElementById("menu_offcanvas");
     let footerAccount = document.getElementById("menu_footer_account");
     let footerManagement = document.getElementById("menu_footer_management");
+
+    navbar.innerHTML = '';
+    offcanvas.innerHTML = '';
+    footerAccount.innerHTML = '';
+    footerManagement.innerHTML = '';
+
+    let dashboardSidebar = null;
+    try {
+        dashboardSidebar = document.getElementById("dashboard_sidebar");
+        dashboardSidebar.innerHTML = '';
+    } catch (e) {
+        console.log("Dashboard sidebar is not loaded.");
+    }
 
     function navbar_item_template(route) {
         return '<li class="nav-item"><a class="nav-link menu-route" href="#' + route + '" route-id="' + routes[route].id + '">' + routes[route].title + '</a></li>';
@@ -16,6 +33,9 @@ document.addEventListener("DOMContentLoaded", function () {
     function footer_item_template(route) {
         return '<li class="nav-item mb-2"><a href="#' + route + '" class="nav-link p-0 text-body-secondary">' + routes[route].title + '</a></li>'
         //return '<a href="#' + route + '" class="dropdown-item menu-route" route-id="' + routes[route].id + '">' + routes[route].title + '</a>';
+    }
+    function sidebar_item_template(route) {
+        return '<a class="btn btn-light shadow" href="#' + route + '" route-id="' + routes[route].id + '" role="button">' + routes[route].title + '</a>'
     }
 
     for (let route in routes) {
@@ -31,18 +51,20 @@ document.addEventListener("DOMContentLoaded", function () {
         if (routes[route].menu.includes('footer_management')) {
             footerManagement.innerHTML += footer_item_template(route);
         }
+        if (routes[route].menu.includes('dashboard_sidebar')) {
+            if (dashboardSidebar != null) {
+                dashboardSidebar.innerHTML += sidebar_item_template(route);
+            }
+        }
     }
-});
 
-window.addEventListener("hashchange", switcher, false);
-window.addEventListener("load", switcher, false);
-
-function switcher() {
-    
     let fullLoaction = window.location.hash.substring(1);
 
-    //select page before ?
-    let page = fullLoaction.split('?')[0];
+    //select page between ? and #
+    let page = fullLoaction.split('?')[0].split('#')[0];
+
+    //select anchor after #
+    let anchor = fullLoaction.split('#')[1];
 
     //select parameters after ?
     let parameters = "?" + fullLoaction.split('?')[1];
@@ -54,11 +76,12 @@ function switcher() {
         return;
     }
 
-    // alert("Switching to page: " + page);
-    // alert("Parameters: " + parameters);
+    //alert("Switching to page: " + page);
+    //alert("Parameters: " + parameters);
+    //alert("Anchor: " + anchor);
 
     if (routes[page] == undefined) {
-        if(aliases[page] != undefined){
+        if (aliases[page] != undefined) {
             console.log("Route (" + page + ") is an alias. Redirecting to: " + aliases[page]);
             window.location.href = '#' + aliases[page];
             return;
@@ -67,15 +90,17 @@ function switcher() {
         loadPage('/404', parameters);
         return;
     } else {
-        loadPage(page, parameters);
+        loadPage(page, parameters, anchor);
     }
 
 
 }
 
-function loadPage(route, parameters) {
+function loadPage(route, parameters, anchor = undefined) {
 
-    if(route == undefined){
+    sessionStorage.setItem("lastRoute", routes[route].id);
+
+    if (route == undefined) {
         console.log("Route is undefined.");
         return;
     }
@@ -93,7 +118,12 @@ function loadPage(route, parameters) {
     });
 
     if (routes[route].type == 'redirect') {
+        // if(routes[route].page.startsWith('#')){
+        //     window.location.href = routes[route].page;
+        //     return;
+        // } Not needed anymore
         window.location.replace(routes[route].page);
+        return;
     }
 
     let pageRequest = new XMLHttpRequest();
@@ -108,24 +138,39 @@ function loadPage(route, parameters) {
 
             if (routes[route].script != undefined) {
 
-                let scriptRequest = new XMLHttpRequest();
-                scriptRequest.open("GET", routes[route].script, true);
-                scriptRequest.setRequestHeader('Cache-Control', 'no-cache, no-store, must-revalidate, max-age=0'); // No caching
-                scriptRequest.setRequestHeader('Pragma', 'no-cache'); // No caching
-                scriptRequest.setRequestHeader('Expires', 'Fri, 01 Jan 1990 00:00:00 GMT'); // Cache instantly expires
-                console.log("Requested script at: " + routes[route].script);
-                scriptRequest.onreadystatechange = function () {
-                    if (scriptRequest.readyState == 4 && scriptRequest.status == 200) {
-                        console.log("Script at (" + routes[route].script + ") loaded successfully.");
-                        eval(scriptRequest.responseText);
-                        setTimeout(() => { spinner.classList.add("d-none"); }, 200);
-                    } else if (scriptRequest.readyState == 4 && scriptRequest.status != 200) {
-                        console.error("Script at (" + routes[route].script + ") is 404 not found.");
-                    }
-                };
-                scriptRequest.send();
+                let isArray = Array.isArray(routes[route].script);
+                let scriptArray = [];
+
+                if (isArray) {
+                    routes[route].script.forEach(function (script) {
+                        scriptArray.push(script);
+                    });
+                } else {
+                    scriptArray.push(routes[route].script);
+                }
+
+                scriptArray.forEach(function (script) {
+                    let scriptRequest = new XMLHttpRequest();
+                    scriptRequest.open("GET", script, true);
+                    scriptRequest.setRequestHeader('Cache-Control', 'no-cache, no-store, must-revalidate, max-age=0'); // No caching
+                    scriptRequest.setRequestHeader('Pragma', 'no-cache'); // No caching
+                    scriptRequest.setRequestHeader('Expires', 'Fri, 01 Jan 1990 00:00:00 GMT'); // Cache instantly expires
+                    console.log("Requested script at: " + script);
+                    scriptRequest.onreadystatechange = function () {
+                        if (scriptRequest.readyState == 4 && scriptRequest.status == 200) {
+                            console.log("Script at (" + script + ") loaded successfully.");
+                            eval(scriptRequest.responseText);
+                            setTimeout(() => { spinner.classList.add("d-none"); }, 200);
+                            scrollToAnchor(anchor);
+                        } else if (scriptRequest.readyState == 4 && scriptRequest.status != 200) {
+                            console.error("Script at (" + script + ") is 404 not found.");
+                        }
+                    };
+                    scriptRequest.send();
+                });
             } else {
                 setTimeout(() => { spinner.classList.add("d-none"); }, 200);
+                scrollToAnchor(anchor);
             }
             document.title = routes[route].title + " - Sistema Manutenzione";
             try {
@@ -139,6 +184,16 @@ function loadPage(route, parameters) {
         }
     };
     pageRequest.send();
-    window.scrollTo(0, 0);
 
+}
+
+function scrollToAnchor(anchor) {
+    if (anchor != undefined && anchor != '' && anchor != null) {
+        let anchorElement = document.querySelector('[anchor-id="' + anchor + '"]');
+        if (anchorElement != undefined) {
+            anchorElement.scrollIntoView();
+        }
+    }else{
+        window.scrollTo(0, 0);
+    }
 }

@@ -12,6 +12,17 @@ class Persona
         $this->conn = $db;
     }
 
+    function get_user_data($user_id){
+        $query = "SELECT nome, username, email, immagine_profilo, stile_immagine_profilo
+        FROM $this->table_user
+        INNER JOIN $this->table_token ON $this->table_user.id_utente = $this->table_token.id_utente
+        WHERE $this->table_user.id_utente = '$user_id'";
+
+        $stmt = $this->conn->query($query);
+
+        return $stmt;
+    }
+
     function login_email($email, $password)
     {
         $query = "SELECT id_utente, email
@@ -28,6 +39,17 @@ class Persona
         $query = "SELECT id_utente, email
         FROM $this->table_user 
         WHERE username = '$username' AND password = '$password'";
+
+        $stmt = $this->conn->query($query);
+
+        return $stmt;
+    }
+
+    function login_token($token, $user_id,  $hashed_password){
+        $query = "SELECT $this->table_user.id_utente, token, data_creazione, data_ultima_attivita
+        FROM $this->table_user
+        INNER JOIN $this->table_token ON $this->table_user.id_utente = $this->table_token.id_utente
+        WHERE $this->table_user.id_utente = '$user_id' AND password = '$hashed_password' AND token = '$token'";
 
         $stmt = $this->conn->query($query);
 

@@ -3,6 +3,10 @@ src/vendor/
 vendor/
 /vendor/
 
+# Ignoriamo i file caricati dagli utenti, ma teniamo comunque traccia della cartella
+src/images/uploads/*
+!src/images/uploads/.gitkeep
+
 # Commit your application's lock file https://getcomposer.org/doc/01-basic-usage.md#commit-your-composer-lock-file-to-version-control
 # You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
 # composer.lock
@@ -11,3 +15,67 @@ composer.lock
 
 # Dati della connessione al database
 connectionData.json
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#
+#   “Essere liberi non significa solo sbarazzarsi delle proprie catene,
+#   ma vivere in un modo che rispetta e valorizza la libertà degli altri.”
+#
+#                                                              - Nelson Mandela

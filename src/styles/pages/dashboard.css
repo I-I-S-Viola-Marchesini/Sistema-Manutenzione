@@ -1,0 +1,55 @@
+.propic-container {
+    width: 120px;
+    height: 120px;
+    cursor: pointer;
+    background-image: url('../../images/propic-placeholder.jpg');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.change-propic-button {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    transition: 300ms;
+    opacity: 0;
+}
+
+.change-propic-button:hover {
+    opacity: 1;
+}
+
+.propic-radio-input{
+    display: none;
+}
+
+.propic-radio-input+label{
+    opacity: 0.3;
+    border-width: 0.2rem;
+    border-style: solid;
+    border-radius: 50rem;
+}
+
+.propic-radio-input:checked+label{
+    opacity: 1;
+    border-color: #7d3ff8;
+}
+
+#password_container {
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+
+#confirm_account_collapse {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+
+    --bs-bg-opacity: .7;
+}

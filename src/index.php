@@ -11,7 +11,8 @@ $loader = require_once __DIR__ . '/vendor/autoload.php';
     <link href="styles/bootstrap/custom.css" rel="stylesheet">
     <script src="vendor/tinymce/tinymce/tinymce.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js" integrity="sha256-WCzAhd2P6gRJF9Hv3oOOd+hFJi/QJbv+Azn4CGB8gfY=" crossorigin="anonymous"></script>
-    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+    <link rel="shortcut icon" href="images/tools.svg" type="image/x-icon">
+    <link rel="icon" type="image/x-icon" href="images/tools.svg">
     <title>Sistema Manutenzione</title>
 </head>
 
@@ -24,6 +25,14 @@ $loader = require_once __DIR__ . '/vendor/autoload.php';
                     <p class="m-0">Accesso effettuato con successo</p>
                 </div>
                 <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+        <div id="chooseNewPassword" class="toast align-items-center text-bg-warning border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body text-dark">
+                    <p class="m-0">Scegli una nuova password per continuare</p>
+                </div>
+                <button type="button" class="btn-close btn-close-dark me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
         </div>
     </div>

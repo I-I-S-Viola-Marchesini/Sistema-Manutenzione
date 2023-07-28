@@ -6,6 +6,8 @@ CREATE TABLE utente(
     nome VARCHAR(40) NOT NULL,
     username VARCHAR(40) NOT NULL,
     email VARCHAR(100) NOT NULL,
+    immagine_profilo VARCHAR(100),
+    stile_immagine_profilo int NOT NULL DEFAULT 0,
     password VARCHAR(256) NOT NULL,
     id_ruolo INT NOT NULL
 );

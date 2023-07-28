@@ -21,7 +21,7 @@ $mailer = new Mail($db_conn);
 
 $hashed_password = hash('sha256', $data->password, false);
 
-if (empty($data->token)) {
+if (empty($data->token) || empty($data->id_user)) {
     firstLogin($data, $user, $mailer, $hashed_password);
 } else {
     fastLogin($data, $user, $hashed_password);
@@ -83,12 +83,28 @@ function firstLogin($data, $user, $mailer, $hashed_password)
 //  token + id + password = login diretto
 function fastLogin($data, $user, $hashed_password)
 {
-    $stmt = $user->login_token($data->token, $data->email_user, $hashed_password);
+    $stmt = $user->login_token($data->token, $data->user_id,  $hashed_password);
 
     if ($stmt->num_rows > 0) {
         $row = $stmt->fetch_assoc();
+
+        $dataCreazione = $row['data_creazione']; //controlla se sono passati 7 giorni
+        $dataUltimaAttivita = $row['data_ultima_attivita']; //controlla se sono passati 30 minuti
+
+        if(isOlderThan($dataUltimaAttivita, 1800)){
+            http_response_code(401);
+            echo json_encode(["message" => "Token expired"]);
+            die();
+        }
+
+        if(isOlderThan($dataCreazione, 604800)){
+            http_response_code(401);
+            echo json_encode(["message" => "Token expired"]);
+            die();
+        }
+
         $user_arr = array(
-            "token" => $row['token'],
+            "userId" => $row['id_utente'],
             "session" => $row['session']
         );
         http_response_code(200);
@@ -101,8 +117,6 @@ function fastLogin($data, $user, $hashed_password)
 
 function sendEmail($mailer, $email, $codice)
 {
-    $codice = substr($codice, 0, 3) . "&nbsp;" . substr($codice, 3, 3);
-
     $mailer->sendEmail(
         'standard_base.html',
         '2fa_template.html',
@@ -111,4 +125,13 @@ function sendEmail($mailer, $email, $codice)
         array('{nomePC}', '{codice}'),
         array('', $codice)
     );
+}
+
+function isOlderThan($date, $time){
+    $tempoPassato = time() - strtotime($date);
+    if($tempoPassato > $time){
+        return true;
+    }
+
+    return false;
 }
